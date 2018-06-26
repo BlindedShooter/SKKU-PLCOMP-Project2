@@ -43,7 +43,8 @@ enum {
 	PLUS,		// +
 	MUL,		// *
 	WORD,		// word
-	NUM			// num
+	NUM,		// num
+	END,		// $
 };
 
 typedef struct _Token
@@ -52,6 +53,38 @@ typedef struct _Token
 	int value_num;
 	char value_word[255];
 }Token;
+
+typedef struct _Ptable
+{
+	int state;
+	int token;
+	int action;
+	int next;
+}Ptable;
+
+Ptable ptable[] = {
+	{	0,	 WORD,	SHIFT,	3	},
+	{	0,	 INT,	SHIFT,	4	},
+	{	0,	 CHAR,	SHIFT,	5	},
+	{	0,	 PROG,	GOTO,	1	},
+	{	0,	 VTYPE,	GOTO,	2	},
+	{	1,	 END,	ACCEPT,	0	},
+	{	2,	 WORD,	SHIFT,	6	},
+	{	3,	 PHL,	SHIFT,	7	},
+	{	4,	 WORD,	REDUCE,	11	},
+	{	5,	 WORD,	REDUCE,	12	},
+	{	6,	 PHL,	SHIFT,	8	},
+	{	7,	 WORD,	SHIFT,	11	},
+	{	7,	 PHR,	SHIFT,	10	},
+	{	7,	 WORDS,	GOTO,	9	},
+	{	8,	 WORD,	SHIFT,	11	},
+	{	8,	 PHR,	SHIFT,	13	},
+	{	8,	 WORDS,	GOTO,	12	},
+	{	9,	 PHR,	SHIFT,	14	},
+	{	9,	 COMMA,	SHIFT,	15	},
+	{	10,	 MPHL,	SHIFT,	17	},
+	{	10,  BLOCK,	GOTO,	16	}
+};
 
 bool is_terminal(char key);
 void get_token(char *str, vector<Token> *token_list);
