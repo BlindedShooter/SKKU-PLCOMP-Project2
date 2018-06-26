@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <string.h>
+#include <vector>
+
+using namespace std;
 
 enum {
 	PHL,		// (
@@ -26,10 +30,11 @@ enum {
 typedef struct _Token
 {
 	int type;
-	int value;
+	int value_num;
+	char value_word[255];
 }Token;
 
-void get_token(char *str);
+void get_token(char *str, vector<Token> *token_list);
 void scanner(char *file_name);
 
 int main(int argc, char *argv[])
@@ -44,12 +49,118 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void get_token(char *str)
+void get_token(char *str, vector<Token> *token_list)
 {
+	int i, n, tn;
+	char token[255] = { 0 };
+	Token new_token;
+	n = strlen(str);
+
+	tn = 0;
+	for (i = 0; i <= n; i++) {
+		switch (str[i]) {
+		case '(':
+		case ')':
+		case ';':
+		case ',':
+		case '{':
+		case '}':
+		case '=':
+		case '>':
+		case '<':
+		case '+':
+		case '*':
+		case ' ':
+		case '\n':
+		case '\0':
+		case '\t':
+			if (tn > 0) {
+				token[tn] = '\0';
+
+				if (strcmp(token, "INT") == 0) new_token.type = INT;
+				else if (strcmp(token, "CHAR") == 0) new_token.type = CHAR;
+				else if (strcmp(token, "IF") == 0) new_token.type = IF;
+				else if (strcmp(token, "THEN") == 0) new_token.type = THEN;
+				else if (strcmp(token, "ELSE") == 0) new_token.type = ELSE;
+				else if (strcmp(token, "WHILE") == 0) new_token.type = WHILE;
+				else if (strcmp(token, "RETURN") == 0) new_token.type = RETURN;
+				else if ('0' <= token[0] && token[0] <= '9') {
+					new_token.type = NUM;
+					new_token.value_num = atoi(token);
+				}
+				else {
+					new_token.type = WORD;
+					strcpy_s(new_token.value_word, token);
+				}
+
+				token_list->push_back(new_token);
+				tn = 0;
+			}
+			break;
+		}
+
+		switch (str[i]) {
+		case '(':
+			new_token.type = PHL;
+			token_list->push_back(new_token);
+			break;
+		case ')':
+			new_token.type = PHR;
+			token_list->push_back(new_token);
+			break;
+		case ';':
+			new_token.type = SEMICOLON;
+			token_list->push_back(new_token);
+			break;
+		case ',':
+			new_token.type = COMMA;
+			token_list->push_back(new_token);
+			break;
+		case '{':
+			new_token.type = MPHL;
+			token_list->push_back(new_token);
+			break;
+		case '}':
+			new_token.type = MPHR;
+			token_list->push_back(new_token);
+			break;
+		case '=':
+			new_token.type = EQUAL;
+			token_list->push_back(new_token);
+			break;
+		case '>':
+			new_token.type = GREATER;
+			token_list->push_back(new_token);
+			break;
+		case '<':
+			new_token.type = LESS;
+			token_list->push_back(new_token);
+			break;
+		case '+':
+			new_token.type = PLUS;
+			token_list->push_back(new_token);
+			break;
+		case '*':
+			new_token.type = MUL;
+			token_list->push_back(new_token);
+			break;
+
+		case ' ':
+		case '\n':
+		case '\0':
+		case '\t':
+			break;
+
+		default:
+			token[tn++] = str[i];
+			break;
+		}
+	}
 }
 
 void scanner(char *file_name)
 {
+	vector<Token> token_list;
 	FILE *in;
 	fopen_s(&in, file_name, "r");
 
@@ -59,12 +170,24 @@ void scanner(char *file_name)
 		while (!feof(in))
 		{
 			fgets(line, sizeof(line), in);
-			printf("%s", line);
+			get_token(line, &token_list);
 		}
 
 		fclose(in);
 	}
 	else {
 		printf("Input file error.\n");
+	}
+
+	for (int i = 0; i < token_list.size(); i++) {
+		if (token_list[i].type == WORD) {
+			printf("%d %s\n", token_list[i].type, token_list[i].value_word);
+		}
+		else if (token_list[i].type == NUM) {
+			printf("%d %d\n", token_list[i].type, token_list[i].value_num);
+		}
+		else {
+			printf("%d\n", token_list[i].type);
+		}
 	}
 }
