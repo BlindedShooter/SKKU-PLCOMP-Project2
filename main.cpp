@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+typedef struct _Token
+{
+	int type;
+	int value;
+}Token;
+
 void get_token(char *str);
 void scanner(char *file_name);
 
