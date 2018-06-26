@@ -5,6 +5,11 @@
 using namespace std;
 
 enum {
+	SHIFT,
+	REDUCE,
+	GOTO,
+	ACCEPT,
+
 	PROGS,		// prog'
 	PROG,		// prog
 	DECLS,		// decls
