@@ -83,7 +83,12 @@ Ptable ptable[] = {
 	{	9,	 PHR,	SHIFT,	14	},
 	{	9,	 COMMA,	SHIFT,	15	},
 	{	10,	 MPHL,	SHIFT,	17	},
-	{	10,  BLOCK,	GOTO,	16	}
+	{	10,  	BLOCK,	GOTO,	16	},
+	{	11,	 PHR,	REDUCE, 10	},
+	{	11,	COMMA,	REDUCE, 10	},
+	{	12,	PHR,	SHIFT,	18	},
+	{	12,	COMMA,	SHIFT, 	15	},
+	
 };
 
 bool is_terminal(char key);
