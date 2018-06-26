@@ -1,5 +1,28 @@
 #include <stdio.h>
 
+enum {
+	PHL,		// (
+	PHR,		// )
+	SEMICOLON,	// ;
+	COMMA,		// ,
+	INT,		// INT
+	CHAR,		// CHAR
+	MPHL,		// {
+	MPHR,		// }
+	IF,			// IF
+	THEN,		// THEN
+	ELSE,		// ELSE
+	WHILE,		// WHILE
+	EQUAL,		// =
+	RETURN,		// RETURN
+	GREATER,	// >
+	LESS,		// <
+	PLUS,		// +
+	MUL,		// *
+	WORD,		// word
+	NUM			// num
+};
+
 typedef struct _Token
 {
 	int type;
@@ -23,7 +46,6 @@ int main(int argc, char *argv[])
 
 void get_token(char *str)
 {
-
 }
 
 void scanner(char *file_name)
