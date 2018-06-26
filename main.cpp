@@ -5,6 +5,20 @@
 using namespace std;
 
 enum {
+	PROGS,		// prog'
+	PROG,		// prog
+	DECLS,		// decls
+	DECL,		// decl
+	WORDS,		// words
+	VTYPE,		// vtype
+	BLOCK,		// block
+	SLIST,		// slist
+	STAT,		// stat
+	COND,		// cond
+	EXPR,		// expr
+	TERM,		// term
+	FACT,		// fact
+
 	PHL,		// (
 	PHR,		// )
 	SEMICOLON,	// ;
