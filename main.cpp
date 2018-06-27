@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
 #include <vector>
 
 using namespace std;
@@ -54,6 +55,8 @@ typedef struct _Token
 	char value_word[255];
 }Token;
 
+vector<Token> token_list;
+
 typedef struct _Ptable
 {
 	int state;
@@ -62,6 +65,7 @@ typedef struct _Ptable
 	int next;
 }Ptable;
 
+int ptable_n = 679;
 Ptable ptable[] = {
 	{	0,	 WORD,	SHIFT,	3	},
 	{	0,	 INT,	SHIFT,	4	},
@@ -747,7 +751,7 @@ Ptable ptable[] = {
 };
 
 bool is_terminal(char key);
-void get_token(char *str, vector<Token> *token_list);
+void get_token(char *str);
 void scanner(char *file_name);
 
 int main(int argc, char *argv[])
@@ -785,7 +789,7 @@ bool is_terminal(char key)
 	return false;
 }
 
-void get_token(char *str, vector<Token> *token_list)
+void get_token(char *str)
 {
 	int i, n, tn;
 	char token[255] = { 0 };
@@ -813,54 +817,54 @@ void get_token(char *str, vector<Token> *token_list)
 				strcpy_s(new_token.value_word, token);
 			}
 
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			tn = 0;
 		}
 
 		switch (str[i]) {
 		case '(':
 			new_token.type = PHL;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case ')':
 			new_token.type = PHR;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case ';':
 			new_token.type = SEMICOLON;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case ',':
 			new_token.type = COMMA;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '{':
 			new_token.type = MPHL;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '}':
 			new_token.type = MPHR;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '=':
 			new_token.type = EQUAL;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '>':
 			new_token.type = GREATER;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '<':
 			new_token.type = LESS;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '+':
 			new_token.type = PLUS;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 		case '*':
 			new_token.type = MUL;
-			token_list->push_back(new_token);
+			token_list.push_back(new_token);
 			break;
 
 		case ' ':
@@ -878,7 +882,6 @@ void get_token(char *str, vector<Token> *token_list)
 
 void scanner(char *file_name)
 {
-	vector<Token> token_list;
 	FILE *in;
 	fopen_s(&in, file_name, "r");
 
@@ -888,7 +891,7 @@ void scanner(char *file_name)
 		while (!feof(in))
 		{
 			fgets(line, sizeof(line), in);
-			get_token(line, &token_list);
+			get_token(line);
 		}
 
 		fclose(in);
@@ -897,7 +900,10 @@ void scanner(char *file_name)
 		printf("Input file error.\n");
 	}
 
-	for (int i = 0; i < token_list.size(); i++) {
+	int n = token_list.size();;
+	reverse(token_list.begin(), token_list.end());
+
+	for (int i = 0; i < n; i++) {
 		if (token_list[i].type == WORD) {
 			printf("%d %s\n", token_list[i].type, token_list[i].value_word);
 		}
