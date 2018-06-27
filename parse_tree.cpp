@@ -55,7 +55,11 @@ void build_parse_node(ParseNode *current_node, int level) {
 		}
 		else {
 			for (int i = 1; i <= (level+1) * 4; i++) printf("-");
-			printf("%s\n", get_type_name((type_t)child_node->value.type));
+			printf("%s", get_type_name((type_t)child_node->value.type));
+			if (child_node->value.type == NUM || child_node->value.type == WORD) {
+				printf(" %s", child_node->value.value);
+			}
+			printf("\n");
 		}
 	}
 }
