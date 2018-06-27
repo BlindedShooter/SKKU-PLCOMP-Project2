@@ -84,6 +84,10 @@ Ptable ptable[] = {
 	{	9,	 COMMA,	SHIFT,	15	},
 	{	10,	 MPHL,	SHIFT,	17	},
 	{	10,  BLOCK,	GOTO,	16	},
+	{	11,	 PHR,	REDUCE, 10	},
+	{	11,	COMMA,	REDUCE, 10	},
+	{	12,	PHR,	SHIFT,	18	},
+	{	12,	COMMA,	SHIFT, 	15	},
 
 	{  170,	 SEMICOLON,	REDUCE,	28 },
 	{  171,	 SEMICOLON,	REDUCE,	29 },
