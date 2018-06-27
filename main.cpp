@@ -6,7 +6,7 @@
 using namespace std;
 
 enum {
-	SHIFT,
+	SHIFT = 1000,
 	REDUCE,
 	GOTO,
 	ACCEPT,
@@ -920,5 +920,9 @@ void scanner(char *file_name)
 
 void parser()
 {
+	vector<Token> stack;
+	Token temp_token;
 
+	temp_token.type = 0;
+	stack.push_back(temp_token);
 }
