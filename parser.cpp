@@ -1,5 +1,10 @@
 #include "parser.h"
 
+void compile_error() {
+	printf("Compile error.\n");
+	exit(0);
+}
+
 void parser() {
     vector<Token> stack;
     Token temp_token, stack_token, input_token;
@@ -57,10 +62,7 @@ void parser() {
             }
         }
 
-        if (error_check) {
-            printf("Compile error.\n");
-            break;
-        }
+        if (error_check) compile_error();
     }
 }
 
