@@ -936,6 +936,10 @@ void parser()
 			if (ptable[i].state == stack_token.type && ptable[i].token == input_token.type) {
 				switch (ptable[i].action) {
 				case SHIFT:
+					stack.push_back(input_token);
+					temp_token.type = ptable[i].next;
+					stack.push_back(temp_token);
+					token_list.pop_back();
 					break;
 				case REDUCE:
 					break;
@@ -944,7 +948,9 @@ void parser()
 				case ACCEPT:
 					break;
 				}
+
 				error_check = false;
+				break;
 			}
 		}
 
