@@ -11,7 +11,7 @@ Scope::Scope(Scope *parent_) : parent(parent_), name(std::to_string(scope_number
     level = parent_->level + 1;
 }
 
-Scope::Scope(Scope *parent_, std::string name_) : parent(parent_), name(name_) {
+Scope::Scope(Scope *parent_, const std::string &name_) : parent(parent_), name(name_) {
     parent_->child.push_back(this);
     level = parent_->level + 1;
 }
