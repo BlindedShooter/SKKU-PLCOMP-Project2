@@ -563,6 +563,59 @@ Ptable ptable[] = {
 	{	104,	 LESS,	REDUCE,	32	},
 	{	104,	 PLUS,	REDUCE,	32	},
 	
+	{	105,	 MPHL,	REDUCE,	24	},
+	
+	{	106,	 MPHL,	REDUCE,	27	},
+	{	106,	 PLUS,	SHIFT,	140	},
+	
+	{	107,	 MPHL,	REDUCE,	29	},
+	{	107,	 PLUS,	REDUCE,	29	},
+	{	107,	 MUL,	SHIFT,	141	},
+	
+	{	108,	 MPHL,	REDUCE,	31	},
+	{	108,	 PLUS,	REDUCE,	31	},
+	{	108,	 MUL,	REDUCE,	31	},
+
+	{	109,	 MPHL,	REDUCE,	32	},
+	{	109,	 PLUS,	REDUCE,	32	},
+	{	109,	 MUL,	REDUCE,	32	},
+	
+	{	110,	 MPHL,	REDUCE,	25	},
+	
+	{	111,	 MPHL,	REDUCE,	28	},
+	{	111,	 GREATER,	REDUCE,	28	},
+	{	111,	 LESS,	REDUCE,	28	},
+	
+	{	112,	 MPHL,	REDUCE,	29	},
+	{	112,	 GREATER,	REDUCE,	29	},
+	{	112,	 LESS,	REDUCE,	29	},
+	{	112,	 MUL,	SHIFT,	142	},
+	
+	{	113,	 MPHL,	REDUCE,	31	},
+	{	113,	 GREATER,	REDUCE,	31	},
+	{	113,	 LESS,	REDUCE,	31	},
+	{	113,	 MUL,	REDUCE,	31	},
+
+	{	114,	 MPHL,	REDUCE,	32	},
+	{	114,	 GREATER,	REDUCE,	32	},
+	{	114,	 LESS,	REDUCE,	32	},
+	{	114,	 MUL,	REDUCE,	32	},	
+	
+	{	115,	 MPHL,	REDUCE,	30	},
+	{	115,	 GREATER,	REDUCE,	30	},
+	{	115,	 LESS,	REDUCE,	30	},
+	{	115,	 PLUS,	REDUCE,	30	},
+	
+	{	116,	 MPHL,	REDUCE,	31	},
+	{	116,	 GREATER,	REDUCE,	31	},
+	{	116,	 LESS,	REDUCE,	31	},
+	{	116,	 PLUS,	REDUCE,	31	},
+
+	{	117,	 MPHL,	REDUCE,	32	},
+	{	117,	 GREATER,	REDUCE,	32	},
+	{	117,	 LESS,	REDUCE,	32	},
+	{	117,	 PLUS,	REDUCE,	32	},
+	
 	{}
 	
 	
