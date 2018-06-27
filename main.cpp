@@ -714,6 +714,63 @@ Ptable ptable[] = {
 	{	136,	 ELSE,	REDUCE,	16	},
 	
 	
+	{	137,	 WORD,	SHIFT,	153	},
+	{	137,	 NUM,	SHIFT,	152	},
+	{	137,	 TERM,	GOTO,	150	},
+	{	137,	 FACT,	GOTO,	151	},
+	
+	{	138,	 WORD,	SHIFT,	156	},
+	{	138,	 NUM,	SHIFT,	155	},
+	{	138,	 FACT,	GOTO,	154	},	
+	
+	{	139,	 WORD,	SHIFT,	159	},
+	{	139,	 NUM,	SHIFT,	158	},
+	{	139,	 FACT,	GOTO,	157	},
+
+	{	140,	 WORD,	SHIFT,	163	},
+	{	140,	 NUM,	SHIFT,	162	},
+	{	140,	 TERM,	GOTO,	160	},
+	{	140,	 FACT,	GOTO,	161	},
+	
+	{	141,	 WORD,	SHIFT,	166	},
+	{	141,	 NUM,	SHIFT,	165	},
+	{	141,	 FACT,	GOTO,	164	},	
+	
+	{	142,	 WORD,	SHIFT,	169	},
+	{	142,	 NUM,	SHIFT,	168	},
+	{	142,	 FACT,	GOTO,	167	},
+	
+	{	143,	 WORD,	SHIFT,	173	},
+	{	143,	 NUM,	SHIFT,	172	},
+	{	143,	 TERM,	GOTO,	170	},
+	{	143,	 FACT,	GOTO,	171	},
+	
+	{	144,	 WORD,	SHIFT,	176	},
+	{	144,	 NUM,	SHIFT,	175	},
+	{	144,	 FACT,	GOTO,	175	},	
+	
+	{	145,	 WORD,	SHIFT,	179	},
+	{	145,	 NUM,	SHIFT,	178	},
+	{	145,	 FACT,	GOTO,	177	},
+	
+	{	146,	 WORD,	REDUCE,	20	},
+	{	146,	 MPHL,	REDUCE,	20	},
+	{	146,	 MPHR,	REDUCE,	20	},
+	{	146,	 IF,	REDUCE,	20	},
+	{	146,	 WHILE,	REDUCE,	20	},
+	{	146,	 RETURN,REDUCE,	20	},
+	
+	{	147,	 WORD,	SHIFT,	41	},
+	{	147,	 MPHL,	SHIFT,	34	},
+	{	147,	 MPHR,	SHIFT,	180	},
+	{	147,	 IF,	SHIFT,	30	},
+	{	147,	 WHILE,	SHIFT,	31	},
+	{	147,	 RETURN,SHIFT,	33	},
+	{	147,	 BLOCK,	GOTO,	29	},
+	{	147,	 STAT,	GOTO,	40	},
+	{	148,	 ELSE,	REDUCE,	15	},
+	{	149,	 ELSE,	REDUCE,	14	},
+	
 	
 	{}
 	
