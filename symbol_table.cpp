@@ -54,7 +54,7 @@ int insert_symbol(const std::string &name, type_t type) {
 }
 
 type_t local_lookup(const std::string &name) {
-    auto &finding = current_scope->symbol_table.find(name);
+    auto finding = current_scope->symbol_table.find(name);
     type_t result;
 
     if (finding == current_scope->symbol_table.end()) {  // should be tested if it works well...
@@ -70,7 +70,7 @@ type_t lookup(const std::string &name) {
 
     Scope *finding_scope = current_scope;
     for (; finding_scope->level >= 0; finding_scope = finding_scope->parent) {
-        auto &finding = current_scope->symbol_table.find(name);
+        auto finding = current_scope->symbol_table.find(name);
 
         if (finding == current_scope->symbol_table.end()) {  // should be tested if it works well...
             continue;

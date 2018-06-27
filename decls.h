@@ -75,10 +75,17 @@ typedef struct _Rtable {
 	int push;
 } Rtable;
 
-extern vector<Token> token_list;
-extern const int ptable_n;
+typedef struct _Stable {
+	type_t token;
+	type_t right_child;
+	type_t next;
+} Stable;
+
+extern vector<Token> token_list, parsed_list;
+extern const int ptable_n, stable_n;
 extern Ptable ptable[];
 extern Rtable rtable[];
+extern Stable stable[];
 
 const char *get_type_name(type_t type);
 

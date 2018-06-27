@@ -35,6 +35,7 @@ void parser() {
 		switch (ptable[index].action) {
 		case SHIFT:
 			printf("SHIFT  %5d (%5d, %10s)\n", ptable[index].next, stack_token.type, get_type_name((type_t)(input_token.type)));
+			parsed_list.push_back(input_token);
 
 			stack.push_back(input_token);
 			temp_token.type = ptable[index].next;
@@ -55,6 +56,7 @@ void parser() {
 
 			jndex = get_parse_table_index(previous_state, rtable[ptable[index].next].push);
 			printf("GOTO   %5d (%5d, %10s)\n", ptable[jndex].next, previous_state, get_type_name((type_t)(rtable[ptable[index].next].push)));
+			parsed_list.emplace_back(rtable[ptable[index].next].push, nullptr);
 
 			temp_token.type = ptable[jndex].next;
 			stack.push_back(temp_token);

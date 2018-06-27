@@ -15,7 +15,7 @@ struct Scope {
 
     Scope();
 
-    explicit Scope::Scope(Scope *parent_);
+    explicit Scope(Scope *parent_);
 
     Scope(Scope *parent_, const std::string &name_);
 
