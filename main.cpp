@@ -753,6 +753,7 @@ Ptable ptable[] = {
 bool is_terminal(char key);
 void get_token(char *str);
 void scanner(char *file_name);
+void parser();
 
 int main(int argc, char *argv[])
 {
@@ -762,6 +763,7 @@ int main(int argc, char *argv[])
 	}
 
 	scanner(argv[1]);
+	parser();
 
 	return 0;
 }
@@ -900,7 +902,7 @@ void scanner(char *file_name)
 		printf("Input file error.\n");
 	}
 
-	int n = token_list.size();;
+	int n = token_list.size();
 	reverse(token_list.begin(), token_list.end());
 
 	for (int i = 0; i < n; i++) {
@@ -914,4 +916,9 @@ void scanner(char *file_name)
 			printf("%d\n", token_list[i].type);
 		}
 	}
+}
+
+void parser()
+{
+
 }
