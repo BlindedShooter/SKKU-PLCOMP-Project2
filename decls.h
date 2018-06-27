@@ -2,6 +2,7 @@
 #define SKKU_PLCOMP_PROJECT2_MAIN_DECLS_H
 
 #include <cstring>
+#include <string>
 #include <algorithm>
 #include <vector>
 
