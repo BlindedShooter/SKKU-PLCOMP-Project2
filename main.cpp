@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	}
 
 	scanner(argv[1]);
-  parser();
+	parser();
 
 	return 0;
 }

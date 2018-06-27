@@ -130,17 +130,9 @@ void scanner(char *file_name) {
         printf("Input file error.\n");
     }
 
+	type_t type = END;
+	token_list.emplace_back(type, nullptr);
+
     int n = token_list.size();
     reverse(token_list.begin(), token_list.end());
-
-    for (int i = 0; i < n; i++) {
-        printf("%s ", get_type_name(static_cast<type_t>(token_list[i].type)));
-        if (token_list[i].type == WORD) {
-            printf("%s\n", token_list[i].value);
-        } else if (token_list[i].type == NUM) {
-            printf("%s\n", token_list[i].value);
-        } else {
-            printf("\n");
-        }
-    }
 }

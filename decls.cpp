@@ -686,6 +686,42 @@ Ptable ptable[] = {
         {192, SEMICOLON, REDUCE, 32}
 };
 
+Rtable rtable[] = {
+	{ 1, PROGS },	// prog' -> prog
+	{ 6, PROG },	// prog -> vtype word ( words ) block
+	{ 5, PROG },	// prog -> word ( words ) block
+	{ 5, PROG },	// prog -> vtype word ( ) block
+	{ 4, PROG },	// prog -> word ( ) block
+	{ 2, DECLS },	// decls -> decls decl
+	{ 1, DECLS },	// decls -> decl
+	{ 3, DECL },	// decl -> vtype words ;
+	{ 2, DECL },	// decl -> words ;
+	{ 3, WORDS },	// words -> words , word
+	{ 1, WORDS },	// words -> word
+	{ 1, VTYPE },	// vtype -> INT
+	{ 1, VTYPE },	// vtype -> CHAR
+	{ 4, BLOCK },	// block -> { decls slist }
+	{ 3, BLOCK },	// block -> { slist }
+	{ 3, BLOCK },	// block -> { decls }
+	{ 2, BLOCK },	// block -> { }
+	{ 2, SLIST },	// slist -> slist stat
+	{ 1, SLIST },	// slist -> stat
+	{ 1, STAT },	// stat -> block
+	{ 6, STAT },	// stat -> IF cond THEN block ELSE block
+	{ 3, STAT },	// stat -> WHILE cond block
+	{ 4, STAT },	// stat -> word = cond ;
+	{ 3, STAT },	// stat -> RETURN cond ;
+	{ 3, COND },	// cond -> expr > expr
+	{ 3, COND },	// cond -> expr < expr
+	{ 1, COND },	// cond -> expr
+	{ 1, EXPR },	// expr -> term
+	{ 3, EXPR },	// expr -> term + term
+	{ 1, TERM },	// term -> fact
+	{ 3, TERM },	// term -> fact * fact
+	{ 1, FACT },	// fact -> num
+	{ 1, FACT }		// fact -> word
+};
+
 const char *get_type_name(type_t type) {
     switch (type) {
         case PHL:
