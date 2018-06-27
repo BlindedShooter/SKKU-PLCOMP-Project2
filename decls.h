@@ -69,9 +69,15 @@ typedef struct _Ptable {
     int next;
 } Ptable;
 
+typedef struct _Rtable {
+	int pop_count;
+	int push;
+} Rtable;
+
 extern vector<Token> token_list;
 extern const int ptable_n;
 extern Ptable ptable[];
+extern Rtable rtable[];
 
 const char *get_type_name(type_t type);
 
