@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum {
+typedef enum {
     SHIFT = 1000,
     REDUCE,
     GOTO,
@@ -50,14 +50,13 @@ enum {
     WORD,        // word
     NUM,        // num
     END,        // $
-};
+} type_t;
 
 typedef struct _Token {
     int type;
     int value_num;
     char value_word[255];
 } Token;
-
 
 typedef struct _Ptable {
     int state;
@@ -69,5 +68,7 @@ typedef struct _Ptable {
 extern vector<Token> token_list;
 extern const int ptable_n;
 extern Ptable ptable[];
+
+const char *get_type_name(type_t type);
 
 #endif //SKKU_PLCOMP_PROJECT2_MAIN_DECLS_H

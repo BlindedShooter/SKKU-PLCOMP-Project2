@@ -133,12 +133,13 @@ void scanner(char *file_name) {
     reverse(token_list.begin(), token_list.end());
 
     for (int i = 0; i < n; i++) {
+        printf("%s ", get_type_name(static_cast<type_t>(token_list[i].type)));
         if (token_list[i].type == WORD) {
-            printf("%d %s\n", token_list[i].type, token_list[i].value_word);
+            printf("%s\n", token_list[i].value_word);
         } else if (token_list[i].type == NUM) {
-            printf("%d %d\n", token_list[i].type, token_list[i].value_num);
+            printf("%d\n", token_list[i].value_num);
         } else {
-            printf("%d\n", token_list[i].type);
+            printf("\n");
         }
     }
 }

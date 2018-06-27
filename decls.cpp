@@ -1,6 +1,5 @@
 #include "decls.h"
 
-
 vector<Token> token_list;
 const int ptable_n = 679;
 Ptable ptable[] = {
@@ -686,3 +685,86 @@ Ptable ptable[] = {
         {191, SEMICOLON, REDUCE, 31},
         {192, SEMICOLON, REDUCE, 32}
 };
+
+const char *get_type_name(type_t type) {
+    switch (type) {
+        case PHL:
+            return "PHL";
+        case PHR:
+            return "PHR";
+        case SEMICOLON:
+            return "SEMICOLON";
+        case COMMA:
+            return "COMMA";
+        case INT:
+            return "INT";
+        case CHAR:
+            return "CHAR";
+        case MPHL:
+            return "MPHL";
+        case MPHR:
+            return "MPHR";
+        case IF:
+            return "IF";
+        case THEN:
+            return "THEN";
+        case ELSE:
+            return "ELSE";
+        case WHILE:
+            return "WHILE";
+        case EQUAL:
+            return "EQUAL";
+        case RETURN:
+            return "RETURN";
+        case GREATER:
+            return "GREATER";
+        case LESS:
+            return "LESS";
+        case PLUS:
+            return "PLUS";
+        case MUL:
+            return "MUL";
+        case WORD:
+            return "WORD";
+        case NUM:
+            return "NUM";
+        case END:
+            return "END";
+        case SHIFT:
+            return "SHIFT";
+        case REDUCE:
+            return "REDUCE";
+        case GOTO:
+            return "GOTO";
+        case ACCEPT:
+            return "ACCEPT";
+
+        case PROGS:
+            return "PROGS";        // prog'
+        case PROG:
+            return "PROG";       // prog
+        case DECLS:
+            return "DECLS";       // decls
+        case DECL:
+            return "DECL";       // decl
+        case WORDS:
+            return "WORDS";       // words
+        case VTYPE:
+            return "VTYPE";       // vtype
+        case BLOCK:
+            return "BLOCK";       // block
+        case SLIST:
+            return "SLIST";     // slist
+        case STAT:
+            return "STAT";       // stat
+        case COND:
+            return "COND";       // cond
+        case EXPR:
+            return "EXPR";       // expr
+        case TERM:
+            return "TERM";       // term
+        case FACT:
+            return "FACT";      // fact
+    }
+    return "ERROR!!!";
+}
