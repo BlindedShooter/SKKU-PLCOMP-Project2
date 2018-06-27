@@ -1,28 +1,12 @@
-INT main(arg1, arg2) {
-   INT a, b, c, d;
-   CHAR e;
-   
-   a = 1;
-   b = 2;
-   
-   d = arg1 > arg2;
-   
-   IF 1 < 2 THEN {
-      INT f;
-      f = 0;
-      WHILE f < 5 {
-         f = f + 1;
-         a = a + f;
-      }
-   } ELSE {
-      INT a;
-      a = 3;
-   }
-   
-   IF a < 4 THEN {
-      RETURN a;
-   } ELSE {
-   }
-   
-   RETURN 1;
+INT main()
+{
+	INT a, b;
+	a = 1;
+	b = 2;
+	IF a < 5 THEN {
+		RETURN a;
+	}
+	ELSE {
+		RETURN b;
+	}
 }
