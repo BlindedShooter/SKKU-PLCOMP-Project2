@@ -1,4 +1,8 @@
-#ifndef PROJECT_PARSER_H
-#define PROJECT_PARSER_H
+#ifndef SKKU_PLCOMP_PROJECT2_MAIN_PARSER_H
+#define SKKU_PLCOMP_PROJECT2_MAIN_PARSER_H
 
-#endif //PROJECT_PARSER_H
+#include "decls.h"
+
+void parser();
+
+#endif //SKKU_PLCOMP_PROJECT2_MAIN_PARSER_H

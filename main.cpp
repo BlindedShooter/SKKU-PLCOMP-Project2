@@ -1,7 +1,6 @@
 #include <cstdio>
-#include "scanner.h"
 
-using namespace std;
+#include "scanner.h"
 
 
 int main(int argc, char *argv[])
@@ -12,6 +11,7 @@ int main(int argc, char *argv[])
 	}
 
 	scanner(argv[1]);
+    //parser();
 
 	return 0;
 }
