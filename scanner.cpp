@@ -26,7 +26,8 @@ bool is_terminal(char key) {
 void get_token(char *str) {
     int i, n, tn;
     char token[255] = {0};
-    Token new_token;
+    type_t type;
+    char *value = nullptr;
     n = strlen(str);
 
     tn = 0;
@@ -34,69 +35,69 @@ void get_token(char *str) {
         if (is_terminal(str[i]) && tn > 0) {
             token[tn] = '\0';
 
-            if (strcmp(token, "INT") == 0) new_token.type = INT;
-            else if (strcmp(token, "CHAR") == 0) new_token.type = CHAR;
-            else if (strcmp(token, "IF") == 0) new_token.type = IF;
-            else if (strcmp(token, "THEN") == 0) new_token.type = THEN;
-            else if (strcmp(token, "ELSE") == 0) new_token.type = ELSE;
-            else if (strcmp(token, "WHILE") == 0) new_token.type = WHILE;
-            else if (strcmp(token, "RETURN") == 0) new_token.type = RETURN;
+            if (strcmp(token, "INT") == 0) type = INT;
+            else if (strcmp(token, "CHAR") == 0) type = CHAR;
+            else if (strcmp(token, "IF") == 0) type = IF;
+            else if (strcmp(token, "THEN") == 0) type = THEN;
+            else if (strcmp(token, "ELSE") == 0) type = ELSE;
+            else if (strcmp(token, "WHILE") == 0) type = WHILE;
+            else if (strcmp(token, "RETURN") == 0) type = RETURN;
             else if ('0' <= token[0] && token[0] <= '9') {
-                new_token.type = NUM;
-                new_token.value_num = atoi(token);
+                type = NUM;
+                value = _strdup(token);
             } else {
-                new_token.type = WORD;
-                strcpy_s(new_token.value_word, token);
+                type = WORD;
+                value = _strdup(token);
             }
 
-            token_list.push_back(new_token);
+            token_list.emplace_back(type, value);
             tn = 0;
         }
 
         switch (str[i]) {
             case '(':
-                new_token.type = PHL;
-                token_list.push_back(new_token);
+                type = PHL;
+                token_list.emplace_back(type, nullptr);
                 break;
             case ')':
-                new_token.type = PHR;
-                token_list.push_back(new_token);
+                type = PHR;
+                token_list.emplace_back(type, nullptr);
                 break;
             case ';':
-                new_token.type = SEMICOLON;
-                token_list.push_back(new_token);
+                type = SEMICOLON;
+                token_list.emplace_back(type, nullptr);
                 break;
             case ',':
-                new_token.type = COMMA;
-                token_list.push_back(new_token);
+                type = COMMA;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '{':
-                new_token.type = MPHL;
-                token_list.push_back(new_token);
+                type = MPHL;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '}':
-                new_token.type = MPHR;
-                token_list.push_back(new_token);
+                type = MPHR;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '=':
-                new_token.type = EQUAL;
-                token_list.push_back(new_token);
+                type = EQUAL;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '>':
-                new_token.type = GREATER;
-                token_list.push_back(new_token);
+                type = GREATER;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '<':
-                new_token.type = LESS;
-                token_list.push_back(new_token);
+                type = LESS;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '+':
-                new_token.type = PLUS;
-                token_list.push_back(new_token);
+                type = PLUS;
+                token_list.emplace_back(type, nullptr);
                 break;
             case '*':
-                new_token.type = MUL;
-                token_list.push_back(new_token);
+                type = MUL;
+                token_list.emplace_back(type, nullptr);
                 break;
 
             case ' ':
@@ -135,9 +136,9 @@ void scanner(char *file_name) {
     for (int i = 0; i < n; i++) {
         printf("%s ", get_type_name(static_cast<type_t>(token_list[i].type)));
         if (token_list[i].type == WORD) {
-            printf("%s\n", token_list[i].value_word);
+            printf("%s\n", token_list[i].value);
         } else if (token_list[i].type == NUM) {
-            printf("%d\n", token_list[i].value_num);
+            printf("%s\n", token_list[i].value);
         } else {
             printf("\n");
         }

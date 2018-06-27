@@ -50,12 +50,16 @@ typedef enum {
     WORD,        // word
     NUM,        // num
     END,        // $
+    NONE
 } type_t;
 
 typedef struct _Token {
     int type;
-    int value_num;
-    char value_word[255];
+    char *value;
+
+    _Token() : type(NONE), value(nullptr) {}
+
+    _Token(int type_, char *value_) : type(type_), value(value_) {}
 } Token;
 
 typedef struct _Ptable {

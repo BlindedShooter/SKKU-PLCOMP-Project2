@@ -1,7 +1,6 @@
 #include <cstdio>
 
 #include "scanner.h"
-#include "parser.h"
 
 
 int main(int argc, char *argv[])
@@ -12,7 +11,7 @@ int main(int argc, char *argv[])
 	}
 
 	scanner(argv[1]);
-	parser();
+    //parser();
 
 	return 0;
 }

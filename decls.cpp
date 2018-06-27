@@ -765,6 +765,8 @@ const char *get_type_name(type_t type) {
             return "TERM";       // term
         case FACT:
             return "FACT";      // fact
+        case NONE:
+            return "NONE";
     }
     return "ERROR!!!";
 }
