@@ -750,6 +750,48 @@ Ptable ptable[] = {
 	{  192,	 SEMICOLON,	REDUCE,	32	}
 };
 
+typedef struct _Rtable
+{
+	int pop_count;
+	int push;
+}Rtable;
+
+Rtable rtable[] = {
+	{ 1, PROGS },	// prog' -> prog
+	{ 6, PROG },	// prog -> vtype word ( words ) block
+	{ 5, PROG },	// prog -> word ( words ) block
+	{ 5, PROG },	// prog -> vtype word ( ) block
+	{ 4, PROG },	// prog -> word ( ) block
+	{ 2, DECLS },	// decls -> decls decl
+	{ 1, DECLS },	// decls -> decl
+	{ 3, DECL },	// decl -> vtype words ;
+	{ 2, DECL },	// decl -> words ;
+	{ 3, WORDS },	// words -> words , word
+	{ 1, WORDS },	// words -> word
+	{ 1, VTYPE },	// vtype -> INT
+	{ 1, VTYPE },	// vtype -> CHAR
+	{ 4, BLOCK },	// block -> { decls slist }
+	{ 3, BLOCK },	// block -> { slist }
+	{ 3, BLOCK },	// block -> { decls }
+	{ 2, BLOCK },	// block -> { }
+	{ 2, SLIST },	// slist -> slist stat
+	{ 1, SLIST },	// slist -> stat
+	{ 1, STAT },	// stat -> block
+	{ 6, STAT },	// stat -> IF cond THEN block ELSE block
+	{ 3, STAT },	// stat -> WHILE cond block
+	{ 4, STAT },	// stat -> word = cond ;
+	{ 3, STAT },	// stat -> RETURN cond ;
+	{ 3, COND },	// cond -> expr > expr
+	{ 3, COND },	// cond -> expr < expr
+	{ 1, COND },	// cond -> expr
+	{ 1, EXPR },	// expr -> term
+	{ 3, EXPR },	// expr -> term + term
+	{ 1, TERM },	// term -> fact
+	{ 3, TERM },	// term -> fact * fact
+	{ 1, FACT },	// fact -> num
+	{ 1, FACT }		// fact -> word
+};
+
 bool is_terminal(char key);
 void get_token(char *str);
 void scanner(char *file_name);
@@ -902,20 +944,12 @@ void scanner(char *file_name)
 		printf("Input file error.\n");
 	}
 
+	Token new_token;
+	new_token.type = END;
+	token_list.push_back(new_token);
+
 	int n = token_list.size();
 	reverse(token_list.begin(), token_list.end());
-
-	for (int i = 0; i < n; i++) {
-		if (token_list[i].type == WORD) {
-			printf("%d %s\n", token_list[i].type, token_list[i].value_word);
-		}
-		else if (token_list[i].type == NUM) {
-			printf("%d %d\n", token_list[i].type, token_list[i].value_num);
-		}
-		else {
-			printf("%d\n", token_list[i].type);
-		}
-	}
 }
 
 void parser()
@@ -923,6 +957,7 @@ void parser()
 	vector<Token> stack;
 	Token temp_token, stack_token, input_token;
 	bool error_check = false;
+	int previous_state;
 
 	temp_token.type = 0;
 	stack.push_back(temp_token);
@@ -936,17 +971,35 @@ void parser()
 			if (ptable[i].state == stack_token.type && ptable[i].token == input_token.type) {
 				switch (ptable[i].action) {
 				case SHIFT:
+					printf("SHIFT  %5d (%5d, %5d)\n", ptable[i].next, stack_token.type, input_token.type);
 					stack.push_back(input_token);
 					temp_token.type = ptable[i].next;
 					stack.push_back(temp_token);
 					token_list.pop_back();
 					break;
 				case REDUCE:
-					break;
-				case GOTO:
+					printf("REDUCE %5d (%5d, %5d)\n", ptable[i].next, stack_token.type, input_token.type);
+					for (int j = 1; j <= rtable[ptable[i].next].pop_count * 2; j++) {
+						stack.pop_back();
+					}
+
+					previous_state = stack.back().type;
+
+					temp_token.type = rtable[ptable[i].next].push;
+					stack.push_back(temp_token);
+
+					for (int j = 0; j < ptable_n; j++) {
+						if (ptable[j].state == previous_state && ptable[j].token == rtable[ptable[i].next].push) {
+							printf("GOTO   %5d (%5d, %5d)\n", ptable[j].next, previous_state, rtable[ptable[i].next].push);
+							temp_token.type = ptable[j].next;
+							stack.push_back(temp_token);
+							break;
+						}
+					}
 					break;
 				case ACCEPT:
-					break;
+					printf("ACCEPT!\n");
+					return;
 				}
 
 				error_check = false;
