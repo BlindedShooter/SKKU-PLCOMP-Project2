@@ -771,8 +771,33 @@ Ptable ptable[] = {
 	{	148,	 ELSE,	REDUCE,	15	},
 	{	149,	 ELSE,	REDUCE,	14	},
 	
+	{	150,	 THEN,	REDUCE,	28	},
 	
-	{}
+	{	151,	 THEN,	REDUCE,	29	},
+	{	151,	 PLUS,	SHIFT,	181	},
+	
+	{	152,	 THEN,	REDUCE,	31	},
+	{	152,	 PLUS,	REDUCE,	31	},
+	
+	{	153,	 THEN,	REDUCE,	32	},
+	{	153,	 PLUS,	REDUCE,	32	},
+
+	{	154,	 THEN,	REDUCE,	30	},
+	{	154,	 MUL,	REDUCE,	30	},
+	{	155,	 THEN,	REDUCE,	31	},
+	{	155,	 MUL,	REDUCE,	31	},
+	{	156,	 THEN,	REDUCE,	32	},
+	{	156,	 MUL,	REDUCE,	32	},
+	
+	{	157,	 THEN,	REDUCE,	30	},
+	{	157,	 GREATER,	REDUCE,	30	},
+	{	157,	 LESS,	REDUCE,	30	},
+	{	158,	 THEN,	REDUCE,	31	},
+	{	158,	 GREATER,	REDUCE,	31	},
+	{	158,	 LESS,	REDUCE,	31	},	
+	{	159,	 THEN,	REDUCE,	32	},
+	{	159,	 GREATER,	REDUCE,	32	},
+	{	159,	 LESS,	REDUCE,	32	},
 	
 	
 };
