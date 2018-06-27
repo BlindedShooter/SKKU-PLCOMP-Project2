@@ -493,7 +493,7 @@ Ptable ptable[] = {
 	{	89,	 IF,	REDUCE,	14	},
 	{	89,	 WHILE,	REDUCE,	14	},
 	{	89,	 RETURN,REDUCE,	14	},
-	{	90,	 ELSE,	REDUCE,	133	},
+	{	90,	 ELSE,	SHIFT,	133	},
 	
 	{	91,	 WORD,	SHIFT,	32	},
 	{	91,	 INT,	SHIFT,	4	},
@@ -676,6 +676,44 @@ Ptable ptable[] = {
 	{	131,	 GREATER,	REDUCE,	32	},
 	{	131,	 LESS,	REDUCE,	32	},
 	{	131,	 PLUS,	REDUCE,	32	},
+	
+	{	132,	 WORD,	REDUCE,	13	},
+	{	132, 	 MPHL,	REDUCE,	13	},
+	{	132,	 MPHR,	REDUCE,	13	},
+	{	132,	 IF,	REDUCE,	13	},
+	{	132, 	 WHILE,	REDUCE,	13	},
+	{	132,	 RETURN,REDUCE,	13	},
+	
+	
+	{	133, 	 MPHL,	SHIFT,	34	},
+	//{	133, 	 MPHL,	SHIFT,	34	},//
+	
+	{	134,	 WORD,	SHIFT,	32	},
+	{	134,	 INT,	SHIFT,	4	},
+	{	134,	 CHAR,	SHIFT,	5	},
+	{	134,	 MPHL,	SHIFT,	34	},
+	{	134,	 MPHR,	SHIFT,	148	},
+	{	134,	 IF,	SHIFT,	30	},
+	{	134,	 WHILE,	SHIFT,	31	},
+	{	134,	 RETURN,SHIFT,	33	},
+	{	134,	 DECL,	GOTO,	38	},
+	{	134,	 WORDS,	GOTO,	28	},
+	{	134,	 VTYPE,	GOTO,	27	},
+	{	134,	 BLOCK,	GOTO,	29	},
+	{	134,	 SLIST,	GOTO,	147	},
+	{	134,	 STAT,	GOTO,	26	},
+	
+	{	135,	 WORD,	SHIFT,	41	},
+	{	135,	 MPHL,	SHIFT,	34	},
+	{	135,	 MPHR,	SHIFT,	149	},
+	{	135,	 IF,	SHIFT,	30	},
+	{	135,	 WHILE,	SHIFT,	31	},
+	{	135,	 RETURN,SHIFT,	33	},
+	{	135,	 BLOCK,	GOTO,	29	},
+	{	135,	 STAT,	GOTO,	40	},
+	{	136,	 ELSE,	REDUCE,	16	},
+	
+	
 	
 	{}
 	
