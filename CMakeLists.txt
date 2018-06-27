@@ -1,0 +1,1 @@
+ADD_EXECUTABLE(compiler.out main.cpp decls.h scanner.h scanner.cpp parser.cpp parser.h)
