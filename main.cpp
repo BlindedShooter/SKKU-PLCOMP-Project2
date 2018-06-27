@@ -302,7 +302,7 @@ Ptable ptable[] = {
 	{	62,	 GREATER,	REDUCE,	29	},
 	{	62,	 LESS,	REDUCE,	29	},
 	{	62,	 PLUS,	REDUCE,	29	},
-	{	26,	 MUL,	SHIFT,	86	},
+	{	62,	 MUL,	SHIFT,	86	},
 	{	63,	 SEMICOLON,	REDUCE,	31	},
 	{	63,	 GREATER,	REDUCE,	31	},
 	{	63,	 LESS,	REDUCE,	31	},
