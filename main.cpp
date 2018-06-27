@@ -378,16 +378,191 @@ Ptable ptable[] = {
 	{	68,	 END,	REDUCE,	13	},
 	
 	{	69,	 WORD,	REDUCE,	7	},
-	{	69,	 MPHL,	REDUCE,	7	},
-	{	69,	 MPHR,	REDUCE,	7	},
+	{	69,	 INT,	REDUCE,	7	},
+	{	69,	 CHAR,	REDUCE,	7	},
 	{	69,	 MPHL,	REDUCE,	7	},
 	{	69,	 MPHR,	REDUCE,	7	},
 	{	69,	 IF,	REDUCE,	7	},
 	{	69,	 WHILE,	REDUCE,	7	},
 	{	69,	 RETURN,REDUCE,	7	},
+
+	{	70,	 SEMICOLON,	REDUCE,	9	},
+	{	70,	 COMMA,	REDUCE,	9	},
+
+
+	{	71,	 MPHL,	SHIFT,	91	},
+	{	71,	 BLOCK,	GOTO,	90	},
+		
+	{	72,	 WORD,	SHIFT,	96	},
+	{	72,	 NUM,	SHIFT,	95	},
+	{	72,	 EXPR,	GOTO,	92	},
+	{	72,	 TERM,	GOTO,	93	},
+	{	72,	 FACT,	GOTO,	94	},
 	
+	{	73,	 WORD,	SHIFT,	96	},
+	{	73,	 NUM,	SHIFT,	95	},
+	{	73,	 EXPR,	GOTO,	97	},
+	{	73,	 TERM,	GOTO,	93	},
+	{	73,	 FACT,	GOTO,	94	},
+	
+	{	74,	 WORD,	SHIFT,	101	},
+	{	74,	 NUM,	SHIFT,	100	},
+	{	74,	 TERM,	GOTO,	98	},
+	{	74,	 FACT,	GOTO,	99	},
+	
+	{	75,	 WORD,	SHIFT,	104	},
+	{	75,	 NUM,	SHIFT,	103	},
+	{	75,	 FACT,	GOTO,	102	},
+	
+	{	76,	 WORD,	REDUCE,	21	},
+	{	76,	 MPHL,	REDUCE,	21	},
+	{	76,	 MPHR,	REDUCE,	21	},
+	{	76,	 IF,	REDUCE,	21	},
+	{	76,	 WHILE,	REDUCE,	21	},
+	{	76,	 RETURN,REDUCE,	21	},
 
-
+	{	77,	 WORD,	SHIFT,	109	},
+	{	77,	 NUM,	SHIFT,	108	},
+	{	77,	 EXPR,	GOTO,	105	},
+	{	77,	 TERM,	GOTO,	106	},
+	{	77,	 FACT,	GOTO,	107	},
+	
+	{	78,	 WORD,	SHIFT,	109	},
+	{	78,	 NUM,	SHIFT,	108	},
+	{	78,	 EXPR,	GOTO,	110	},
+	{	78,	 TERM,	GOTO,	106	},
+	{	78,	 FACT,	GOTO,	107	},
+	
+	{	79,	 WORD,	SHIFT,	114	},
+	{	79,	 NUM,	SHIFT,	113	},
+	{	79,	 TERM,	GOTO,	111	},
+	{	79,	 FACT,	GOTO,	112	},
+	
+	{	80,	 WORD,	SHIFT,	117	},
+	{	80,	 NUM,	SHIFT,	116	},
+	{	80,	 FACT,	GOTO,	115	},
+	{	81,	 SEMICOLON,	SHIFT,	118	},
+	
+	{	82,	 WORD,	REDUCE,	23	},
+	{	82,	 MPHL,	REDUCE,	23	},
+	{	82,	 MPHR,	REDUCE,	23	},
+	{	82,	 IF,	REDUCE,	23	},
+	{	82,	 WHILE,	REDUCE,	23	},
+	{	82,	 RETURN,REDUCE,	23	},
+	
+	{	83,	 WORD,	SHIFT,	123	},
+	{	83,	 NUM,	SHIFT,	122	},
+	{	83,	 EXPR,	GOTO,	119	},
+	{	83,	 TERM,	GOTO,	120	},
+	{	83,	 FACT,	GOTO,	121	},
+	
+	{	84,	 WORD,	SHIFT,	123	},
+	{	84,	 NUM,	SHIFT,	122	},
+	{	84,	 EXPR,	GOTO,	124	},
+	{	84,	 TERM,	GOTO,	120	},
+	{	84,	 FACT,	GOTO,	121	},
+	
+	{	85,	 WORD,	SHIFT,	128	},
+	{	85,	 NUM,	SHIFT,	127	},
+	{	85,	 TERM,	GOTO,	125	},
+	{	85,	 FACT,	GOTO,	126	},
+	
+	{	86,	 WORD,	SHIFT,	131	},
+	{	86,	 NUM,	SHIFT,	130	},
+	{	86,	 FACT,	GOTO,	129	},
+		
+	{	87,	 WORD,	SHIFT,	41	},
+	{	87,	 MPHL,	SHIFT,	34	},
+	{	87,	 MPHR,	SHIFT,	132	},
+	{	87,	 IF,	SHIFT,	30	},
+	{	87,	 WHILE,	SHIFT,	31	},
+	{	87,	 RETURN,SHIFT,	33	},
+	{	87,	 BLOCK,	GOTO,	29	},
+	{	87,	 STAT,	GOTO,	40	},
+	
+	{	88,	 WORD,	REDUCE,	15	},
+	{	88,	 MPHL,	REDUCE,	15	},
+	{	88,	 MPHR,	REDUCE,	15	},
+	{	88,	 IF,	REDUCE,	15	},
+	{	88,	 WHILE,	REDUCE,	15	},
+	{	88,	 RETURN,REDUCE,	15	},
+	
+	{	89,	 WORD,	REDUCE,	14	},
+	{	89,	 MPHL,	REDUCE,	14	},
+	{	89,	 MPHR,	REDUCE,	14	},
+	{	89,	 IF,	REDUCE,	14	},
+	{	89,	 WHILE,	REDUCE,	14	},
+	{	89,	 RETURN,REDUCE,	14	},
+	{	90,	 ELSE,	REDUCE,	133	},
+	
+	{	91,	 WORD,	SHIFT,	32	},
+	{	91,	 INT,	SHIFT,	4	},
+	{	91,	 CHAR,	SHIFT,	5	},
+	{	91,	 MPHL,	SHIFT,	34	},
+	{	91,	 MPHR,	SHIFT,	136	},
+	{	91,	 IF,	SHIFT,	30	},
+	{	91,	 WHILE,	SHIFT,	31	},
+	{	91,	 RETURN,SHIFT,	33	},	
+	{	91,	 DECLS,	GOTO,	134	},
+	{	91,	 DECL,	GOTO,	25	},
+	{	91,	 WORDS,	GOTO,	28	},
+	{	91,	 VTYPE,	GOTO,	27	},
+	{	91,	 BLOCK,	GOTO,	29	},
+	{	91,	 SLIST,	GOTO,	135	},
+	{	91,	 STAT,	GOTO,	26	},
+	
+	{	92,	 THEN,	REDUCE,	24	},
+	
+	{	93,	 THEN,	REDUCE,	27	},
+	{	93,	 PLUS,	SHIFT,	137	},
+	
+	{	94,	 THEN,	REDUCE,	29	},
+	{	94,	 PLUS,	REDUCE,	29	},
+	{	94,	 MUL,	SHIFT,	138	},
+	
+	{	95,	 THEN,	REDUCE,	31	},
+	{	95,	 PLUS,	REDUCE,	31	},
+	{	95,	 MUL,	REDUCE,	31	},
+	
+	{	96,	 THEN,	REDUCE,	32	},
+	{	96,	 PLUS,	REDUCE,	32	},
+	{	96,	 MUL,	REDUCE,	32	},
+	{	97,	 THEN,	REDUCE,	25	},
+	
+	{	98,	 THEN,	REDUCE,	28	},
+	{	98,	 GREATER,	REDUCE,	28	},
+	{	98,	 LESS,	REDUCE,	28	},
+	
+	{	99,	 THEN,	REDUCE,	29	},
+	{	99,	 GREATER,	REDUCE,	29	},
+	{	99,	 LESS,	REDUCE,	29	},
+	{	99,	 MUL,	SHIFT,	139	},
+	
+	{	100,	 THEN,	REDUCE,	31	},
+	{	100,	 GREATER,	REDUCE,	31	},
+	{	100,	 LESS,	REDUCE,	31	},
+	{	100,	 MUL,	REDUCE,	31	},
+	
+	{	101,	 THEN,	REDUCE,	32	},
+	{	101,	 GREATER,	REDUCE,	32	},
+	{	101,	 LESS,	REDUCE,	32	},
+	{	101,	 MUL,	REDUCE,	32	},
+	
+	{	102,	 THEN,	REDUCE,	30	},
+	{	102,	 GREATER,	REDUCE,	30	},
+	{	102,	 LESS,	REDUCE,	30	},
+	{	102,	 PLUS,	REDUCE,	30	},
+	
+	{	103,	 THEN,	REDUCE,	31	},
+	{	103,	 GREATER,	REDUCE,	31	},
+	{	103,	 LESS,	REDUCE,	31	},
+	{	103,	 PLUS,	REDUCE,	31	},
+	
+	{	104,	 THEN,	REDUCE,	32	},
+	{	104,	 GREATER,	REDUCE,	32	},
+	{	104,	 LESS,	REDUCE,	32	},
+	{	104,	 PLUS,	REDUCE,	32	},
+	
 	{}
 	
 	
