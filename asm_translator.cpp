@@ -75,7 +75,7 @@ std::string translate_to_asm(const std::string &filename) {
                     } else {    // LT
                         sscanf_s(ctok, "LT Reg#%d, Reg#%d, Reg#%d", &reg1, &reg2, &reg3);
                         result.append("\n\tmov\t" + reg_table[reg1] + ",\t0\n");
-                        result.append("\tcmp\t" + reg_table[reg3] + ",\t" + reg_table[reg2]);
+                        result.append("\tcmp\t" + reg_table[reg2] + ",\t" + reg_table[reg3]);
                         result.append("\n\tjl\t__SKIP" + std::to_string(skip_num));
                         result.append("\n\tmov\t" + reg_table[reg1] + ",\t1\n");
                         result.append("__SKIP" + std::to_string(skip_num++) + ":\n");
