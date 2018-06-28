@@ -196,9 +196,8 @@ void make_pseudo_code(char *file_name) {
 	pseudo_code.push_back("LABEL0:");
 
 	string result_file_name = file_name;
-	result_file_name += ".code";
 
-	ofstream out(result_file_name);
+	ofstream out(result_file_name + ".code");
 	for (int i = 0; i < pseudo_code.size(); i++) {
 		cout << pseudo_code[i] << endl;
 		out << pseudo_code[i] << endl;

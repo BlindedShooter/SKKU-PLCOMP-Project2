@@ -44,4 +44,6 @@ symbol_info local_lookup(const std::string &name);
 
 symbol_info lookup(const std::string &name);
 
+void print_symbol_table(char *file_name);
+
 #endif //PROJECT_SYMBOL_TABLE_H

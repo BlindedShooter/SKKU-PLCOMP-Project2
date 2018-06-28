@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 	printf("\nUsed memory: %d\n", memory_address);
 	printf("\nUsed Register: %d\n", used_register + 1);
 
+	print_symbol_table(argv[1]);
+
 	delete GLOBAL;
 	return 0;
 }
