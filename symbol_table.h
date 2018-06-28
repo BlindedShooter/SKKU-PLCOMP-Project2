@@ -4,22 +4,28 @@
 #include "decls.h"
 #include <unordered_map>  // hash table
 
-typedef unordered_map<std::string, type_t> symbol_table_t;
+struct symbol_info {
+	type_t type;
+	size_t addr;
+
+	symbol_info(type_t type, size_t addr);
+};
+typedef unordered_map<std::string, symbol_info> symbol_table_t;
 
 struct Scope {
-    vector<Scope *> child;
-    std::string name;
-    Scope *parent;
-    symbol_table_t symbol_table;
-    size_t level;
+	vector<Scope *> child;
+	std::string name;
+	Scope *parent;
+	symbol_table_t symbol_table;
+	size_t level;
 
-    Scope();
+	Scope();
 
-    explicit Scope(Scope *parent_);
+	explicit Scope(Scope *parent_);
 
-    Scope(Scope *parent_, const std::string &name_);
+	Scope(Scope *parent_, const std::string &name_);
 
-    ~Scope();
+	~Scope();
 };
 
 extern Scope *GLOBAL;
@@ -31,11 +37,11 @@ void exit_scope();
 
 void enter_scope(const std::string &scope_name);
 
-int insert_symbol(const std::string &name, type_t type);
+int insert_symbol(const std::string &name, symbol_info type);
 
 /* Lookups Return NONE if there is no such symbol. */
-type_t local_lookup(const std::string &name);
+symbol_info local_lookup(const std::string &name);
 
-type_t lookup(const std::string &name);
+symbol_info lookup(const std::string &name);
 
 #endif //PROJECT_SYMBOL_TABLE_H

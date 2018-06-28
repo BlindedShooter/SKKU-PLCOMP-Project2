@@ -1,0 +1,48 @@
+LD Reg#0, $1
+ST 0, Reg#0
+LD Reg#0, $2
+ST 4, Reg#0
+LD Reg#0, 0
+LD Reg#1, 0
+LT Reg#0 Reg#1 Reg#0
+ST 12, Reg#0
+LD Reg#0, $1
+LD Reg#1, $2
+LT Reg#0 Reg#0 Reg#1
+JUMPF Reg#0 LABEL1
+LD Reg#0, $0
+ST 20, Reg#0
+LD Reg#0, 20
+LD Reg#1, $5
+LT Reg#0 Reg#0 Reg#1
+LABEL1:
+JUMPF Reg#0 LABEL2
+LD Reg#0, 0
+LD Reg#1, $1
+ADD Reg#0, Reg#0, Reg#1
+ST 0, Reg#0
+LD Reg#0, 0
+LD Reg#1, 0
+ADD Reg#0, Reg#0, Reg#1
+ST 0, Reg#0
+JUMP LABEL1
+LABEL2:
+JUMP LABEL4
+LABEL3:
+LD Reg#0, $3
+ST 24, Reg#0
+LABEL4:
+LD Reg#0, 0
+LD Reg#1, $4
+LT Reg#0 Reg#0 Reg#1
+JUMPF Reg#0 LABEL5
+LD Reg#0, 0
+MV Reg#0, Reg#0
+JUMP LABEL0
+JUMP LABEL6
+LABEL5:
+LABEL6:
+LD Reg#0, $1
+MV Reg#0, Reg#0
+JUMP LABEL0
+LABEL0:

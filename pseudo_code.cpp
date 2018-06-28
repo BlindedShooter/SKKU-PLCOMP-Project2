@@ -24,7 +24,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 
 	switch (current_node->value.type) {
 	case DECL: // VTYPE WORDS, WORDS
-			   // VTYPE WORDS
+		// VTYPE WORDS
 		if (current_node->child.size() == 3) {
 			if (inorder(current_node->child[0])[0] == "CHAR") type = CHAR;
 			variables = inorder(current_node->child[1]);
@@ -42,13 +42,12 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		break;
 
 	case STAT:  // BLOCK, EQUAL, RETURN, WHILE, IF-THEN-ELSE
-				// BLOCK
+		// BLOCK
 		if (current_node->child.size() == 1) {
 			inorder(current_node->child[0], register_num);
 		}
 		else if (current_node->child.size() == 3) {
 			// WHILE
-			
 			if (current_node->child[0]->value.type == WHILE) {
 				value = inorder(current_node->child[1]);
 				pseudo_code.push_back("LABEL" + to_string(label_num) + ":");
@@ -70,16 +69,15 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		else if (current_node->child.size() == 4) {
 			// EQUAL
 			if (current_node->child[1]->value.type == EQUAL) {
-				value = inorder(current_node->child[0]);
+				value = inorder(current_node->child[0], register_num);
 				inorder(current_node->child[2], register_num);
 				pseudo_code.push_back("ST " + std::to_string(local_lookup(value[0]).addr) + ", Reg#" + std::to_string(register_num));
 			}
 		}
 		// IF-THEN-ELSE
-
 		else if (current_node->child.size() == 6) {
 			if (current_node->child[0]->value.type == IF) {
-				value = inorder(current_node->child[1]);
+				value = inorder(current_node->child[1], register_num);
 				pseudo_code.push_back("JUMPF Reg#" + to_string(register_num) + " LABEL" + to_string(label_num));
 				inorder(current_node->child[3]);
 				pseudo_code.push_back("JUMP LABEL" + to_string(label_num + 1));
@@ -92,42 +90,36 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 
 		variables.clear();
 		break;
-
 		
-		case COND: // EXPR < EXPR , EXPR > EXPR , EXPR
+	case COND: // EXPR < EXPR , EXPR > EXPR , EXPR
 		// EXPR
 		if (current_node->child.size() == 1) {
-		value = inorder(current_node->child[0]);
-		for (int i = 0; i < value.size(); i++) {
-		variables.push_back(value[i]);
-		}
+			value = inorder(current_node->child[0]);
+			for (int i = 0; i < value.size(); i++) {
+				variables.push_back(value[i]);
+			}
 		}
 		// EXPR < EXPR , EXPR > EXPR
 		else if(current_node->child.size() == 3){
+			value = inorder(current_node->child[0], register_num);
+			variables = inorder(current_node->child[2], register_num + 1);
 		
-		value = inorder(current_node->child[0]);
-		variables = inorder(current_node->child[2]);
-		
-		if(value.size() != 0)
-			pseudo_code.push_back("LD Reg#" + to_string(register_num) + ", $" + value[0]);
-		if(variables.size() != 0)
-			pseudo_code.push_back("LD Reg#" + to_string(register_num + 1) + ", $" + variables[0]);
+			if(value.size() != 0)
+				pseudo_code.push_back("LD Reg#" + to_string(register_num) + ", $" + value[0]);
+			if(variables.size() != 0)
+				pseudo_code.push_back("LD Reg#" + to_string(register_num + 1) + ", $" + variables[0]);
 
-		if (current_node->child[1]->value.type == LESS) {
-			pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1));
+			if (current_node->child[1]->value.type == LESS) {
+				pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1));
+			}
+			else if (current_node->child[1]->value.type == GREATER) {
+				pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1) + " Reg#" + to_string(register_num));
+			}
 		}
-		else if (current_node->child[1]->value.type == GREATER) {
-			pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1) + " Reg#" + to_string(register_num));
-		}
-		else {}//ERROR
-		
-		
-		}
-		else {}
 		break;
 		
 	case EXPR: // TERM, TERM + TERM
-			   // TERM
+		// TERM
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0], register_num);
 			for (int i = 0; i < value.size(); i++) {
@@ -143,7 +135,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		break;
 
 	case TERM: // FACT, FACT * FACT 
-			   // FACT
+		// FACT
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0], register_num);
 			for (int i = 0; i < value.size(); i++) {
