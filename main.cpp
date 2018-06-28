@@ -4,6 +4,7 @@
 #include "parser.h"
 #include "parse_tree.h"
 #include "pseudo_code.h"
+#include "asm_translator.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
 	printf("Used Register: %d\n", used_register + 1);
 
 	print_symbol_table(argv[1]);
+
+	translate_to_asm(argv[1]);
+
+
 
 	delete GLOBAL;
 	return 0;

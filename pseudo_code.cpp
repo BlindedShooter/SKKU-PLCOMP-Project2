@@ -110,10 +110,10 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 				pseudo_code.push_back("LD Reg#" + to_string(register_num + 1) + ", $" + variables[0]);
 
 			if (current_node->child[1]->value.type == LESS) {
-				pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1));
+				pseudo_code.push_back("LT Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num + 1));
 			}
 			else if (current_node->child[1]->value.type == GREATER) {
-				pseudo_code.push_back("LT Reg#" + to_string(register_num) + " Reg#" + to_string(register_num + 1) + " Reg#" + to_string(register_num));
+				pseudo_code.push_back("LT Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num + 1) + ", Reg#" + to_string(register_num));
 			}
 		}
 		break;
