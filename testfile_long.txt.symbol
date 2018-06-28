@@ -1,0 +1,13 @@
+{
+Name: a Type: INT Address: 0
+Name: b Type: INT Address: 4
+Name: c Type: INT Address: 8
+Name: d Type: INT Address: 12
+Name: e Type: CHAR Address: 16
+    {
+    Name: f Type: INT Address: 20
+    }
+    {
+    Name: a Type: INT Address: 24
+    }
+}

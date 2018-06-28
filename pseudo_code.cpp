@@ -9,7 +9,7 @@ size_t memory_address, used_register;
 int label_num = 1;
 
 bool is_number(string value) {
-	for (int i = 0; i < value.size(); i++) {
+	for (unsigned i = 0; i < value.size(); i++) {
 		if (value[i] < '0' || '9' < value[i]) return false;
 	}
 	return true;
@@ -20,7 +20,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 	vector<std::string> value;
 	type_t type = INT;
 
-	if (used_register < register_num) used_register = register_num;
+	if (used_register < (unsigned)register_num) used_register = register_num;
 
 	switch (current_node->value.type) {
 	case DECL: // VTYPE WORDS, WORDS
@@ -34,7 +34,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 			variables = inorder(current_node->child[0]);
 		}
 
-		for (int i = 0; i < variables.size(); i++) {
+		for (unsigned i = 0; i < variables.size(); i++) {
 			insert_symbol(variables[i], symbol_info(type, memory_address));
 			memory_address += 4;
 		}
@@ -95,7 +95,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		// EXPR
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0]);
-			for (int i = 0; i < value.size(); i++) {
+			for (unsigned i = 0; i < value.size(); i++) {
 				variables.push_back(value[i]);
 			}
 		}
@@ -122,7 +122,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		// TERM
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0], register_num);
-			for (int i = 0; i < value.size(); i++) {
+			for (unsigned i = 0; i < value.size(); i++) {
 				variables.push_back(value[i]);
 			}
 		}
@@ -138,7 +138,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		// FACT
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0], register_num);
-			for (int i = 0; i < value.size(); i++) {
+			for (unsigned i = 0; i < value.size(); i++) {
 				variables.push_back(value[i]);
 			}
 		}
@@ -178,9 +178,9 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 	case DECLS:
 	case SLIST:
 	default:
-		for (int i = 0; i < current_node->child.size(); i++) {
+		for (unsigned i = 0; i < current_node->child.size(); i++) {
 			value = inorder(current_node->child[i]);
-			for (int j = 0; j < value.size(); j++) {
+			for (unsigned j = 0; j < value.size(); j++) {
 				variables.push_back(value[j]);
 			}
 		}
@@ -198,8 +198,7 @@ void make_pseudo_code(char *file_name) {
 	string result_file_name = file_name;
 
 	ofstream out(result_file_name + ".code");
-	for (int i = 0; i < pseudo_code.size(); i++) {
-		cout << pseudo_code[i] << endl;
+	for (unsigned i = 0; i < pseudo_code.size(); i++) {
 		out << pseudo_code[i] << endl;
 	}
 }
