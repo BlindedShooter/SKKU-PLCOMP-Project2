@@ -43,12 +43,12 @@ void exit_scope() {
     current_scope = current_scope->parent;
 }
 
-int insert_symbol(const std::string &name, type_t type) {
+int insert_symbol(const std::string &name, symbol_info info) {
     int result = 0;
     if (current_scope->symbol_table.find(name) == current_scope->symbol_table.end()) {
         result = 1;
     } else {
-        current_scope->symbol_table.insert({name, type});
+        current_scope->symbol_table.insert({name, info});
     }
     return result;
 }

@@ -92,6 +92,8 @@ std::string translator(const std::string &pseudo_code) {
                     result.append("\tmov\tebp,\t" + std::to_string(address));
                     result.append("\n\tmov\t" + reg_table[reg1] + ",\t[ebp]\n");
                     break;
+                case 'P':
+
                 default:
                     std::cerr << "Maybe The Pseudo Code is broken, or Translator is broken" << std::endl;
 

@@ -4,7 +4,11 @@
 #include "decls.h"
 #include <unordered_map>  // hash table
 
-typedef unordered_map<std::string, type_t> symbol_table_t;
+struct symbol_info {
+    type_t type;
+    size_t addr;
+};
+typedef unordered_map<std::string, symbol_info> symbol_table_t;
 
 struct Scope {
     vector<Scope *> child;
