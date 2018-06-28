@@ -54,7 +54,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 				pseudo_code.push_back("LABEL" + to_string(label_num) + ":");
 				if(value.size() != 0)
 					pseudo_code.push_back("LD Reg#" + to_string(register_num) + ", $" + value[0]);
-				pseudo_code.push_back("JUMPF Reg#" + to_string(register_num) + "label" + to_string(label_num + 1));
+				pseudo_code.push_back("JUMPF Reg#" + to_string(register_num) + " LABEL" + to_string(label_num + 1));
 				inorder(current_node->child[2]);
 				pseudo_code.push_back("JUMP LABEL" + to_string(label_num));
 				pseudo_code.push_back("LABEL" + to_string(label_num + 1) + ":");
