@@ -1,6 +1,6 @@
 #include "decls.h"
 
-vector<Token> token_list;
+vector<Token> token_list, parsed_list;
 const int ptable_n = 679;
 Ptable ptable[] = {
         {0,   WORD,      SHIFT,  3},
@@ -720,6 +720,48 @@ Rtable rtable[] = {
 	{ 3, TERM },	// term -> fact * fact
 	{ 1, FACT },	// fact -> num
 	{ 1, FACT }		// fact -> word
+};
+
+const int stable_n = 38;
+Stable stable[] = {
+	{ TERM,   FACT,			MUL },
+	{ TERM,   MUL,			FACT },
+	{ EXPR,   TERM,			PLUS },
+	{ EXPR,   PLUS,			TERM },
+	{ COND,   EXPR,			LESS },
+	{ COND,   LESS,			EXPR },
+	{ COND,   EXPR,			GREATER },
+	{ COND,   GREATER,		EXPR },
+	{ STAT,   SEMICOLON,	COND },
+	{ STAT,   COND,			RETURN },
+	{ STAT,   COND,			EQUAL },
+	{ STAT,   EQUAL,		WORD },
+	{ STAT,   SEMICOLON,	COND },
+	{ STAT,   BLOCK,		COND },
+	{ STAT,   COND,			WHILE },
+	{ STAT,   BLOCK,		ELSE },
+	{ STAT,   ELSE,			BLOCK },
+	{ STAT,   BLOCK,		THEN },
+	{ STAT,   THEN,			COND },
+	{ STAT,   COND,			IF },
+	{ SLIST,  STAT,			SLIST },
+	{ BLOCK,  MPHR,			MPHL },
+	{ BLOCK,  MPHR,			DECLS },
+	{ BLOCK,  MPHR,			SLIST },
+	{ BLOCK,  SLIST,		MPHL },
+	{ BLOCK,  SLIST,		DECLS },
+	{ BLOCK,  DECLS,		MPHL },
+	{ WORDS,  WORD,			COMMA },
+	{ WORDS,  COMMA,		WORDS },
+	{ DECL,  SEMICOLON,		WORDS },
+	{ DECL,  WORDS,			VTYPE },
+	{ DECLS,  DECL,			DECLS },
+	{ PROG,  BLOCK,			PHR },
+	{ PROG,  PHR,			PHL },
+	{ PROG,  PHL,			WORD },
+	{ PROG,  WORD,			VTYPE },
+	{ PROG,  PHR,			WORDS },
+	{ PROG,  WORDS,			PHL }
 };
 
 const char *get_type_name(type_t type) {

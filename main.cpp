@@ -2,6 +2,7 @@
 
 #include "scanner.h"
 #include "parser.h"
+#include "parse_tree.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
 
 	scanner(argv[1]);
 	parser();
+	build_parse_tree();
 
     delete GLOBAL;
 	return 0;
