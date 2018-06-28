@@ -3,6 +3,7 @@
 #include "scanner.h"
 #include "parser.h"
 #include "parse_tree.h"
+#include "pseudo_code.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,9 +13,17 @@ int main(int argc, char *argv[])
 	}
 
 	scanner(argv[1]);
+	printf("<Parsing>\n");
 	parser();
+	printf("\n<Parse Tree>\n");
 	build_parse_tree();
+	printf("\n<Pseudo Code>\n");
+	make_pseudo_code(argv[1]);
+	printf("\nUsed memory: %d\n", memory_address);
+	printf("\nUsed Register: %d\n", used_register + 1);
 
-    delete GLOBAL;
+	print_symbol_table(argv[1]);
+
+	delete GLOBAL;
 	return 0;
 }
