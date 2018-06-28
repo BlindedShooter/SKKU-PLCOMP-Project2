@@ -6,7 +6,7 @@
 
 vector<std::string> pseudo_code;
 size_t memory_address;
-int label_num = 0;
+int label_num = 1;
 
 bool is_number(string value) {
 	for (int i = 0; i < value.size(); i++) {
@@ -64,6 +64,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 			else if (current_node->child[0]->value.type == RETURN) {
 				inorder(current_node->child[1], register_num);
 				pseudo_code.push_back("MV Reg#0, Reg#" + std::to_string(register_num));
+				pseudo_code.push_back("JUMP LABEL0"); 
 			}
 		}
 		else if (current_node->child.size() == 4) {
@@ -200,6 +201,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 
 void make_pseudo_code(char *file_name) {
 	inorder(parse_tree.root);
+	pseudo_code.push_back("LABEL0:");
 
 	string result_file_name = file_name;
 	result_file_name += ".code";
