@@ -117,7 +117,7 @@ void scanner(char *file_name) {
     FILE *in;
     fopen_s(&in, file_name, "r");
 
-    if (in != NULL) {
+    if (in != nullptr) {
         char line[255];
 
         while (!feof(in)) {

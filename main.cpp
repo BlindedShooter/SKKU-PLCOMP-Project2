@@ -13,5 +13,6 @@ int main(int argc, char *argv[])
 	scanner(argv[1]);
 	parser();
 
+    delete GLOBAL;
 	return 0;
 }

@@ -1,7 +1,7 @@
 #ifndef SKKU_PLCOMP_PROJECT2_MAIN_SCANNER_H
 #define SKKU_PLCOMP_PROJECT2_MAIN_SCANNER_H
 
-#include "decls.h"
+#include "symbol_table.h"
 
 bool is_terminal(char key);
 
