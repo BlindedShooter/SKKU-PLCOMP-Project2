@@ -1,0 +1,12 @@
+LD Reg#0, $1
+ST 0, Reg#0
+LD Reg#0, $2
+ST 4, Reg#0
+LD Reg#0, $3
+ST 8, Reg#0
+LD Reg#0, 0
+LD Reg#1, 4
+LD Reg#2, 8
+MUL Reg#1, Reg#1, Reg#2
+ADD Reg#0, Reg#0, Reg#1
+ST 0, Reg#0
