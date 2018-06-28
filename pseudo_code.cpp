@@ -5,7 +5,7 @@
 #include <fstream>
 
 vector<std::string> pseudo_code;
-size_t memory_address;
+size_t memory_address, used_register;
 int label_num = 1;
 
 bool is_number(string value) {
@@ -20,7 +20,7 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 	vector<std::string> value;
 	type_t type = INT;
 
-	//printf("%s\n", get_type_name((type_t)current_node->value.type));
+	if (used_register < register_num) used_register = register_num;
 
 	switch (current_node->value.type) {
 	case DECL: // VTYPE WORDS, WORDS

@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	printf("\n<Pseudo Code>\n");
 	make_pseudo_code(argv[1]);
 	printf("\nUsed memory: %d\n", memory_address);
+	printf("\nUsed Register: %d\n", used_register + 1);
 
 	delete GLOBAL;
 	return 0;
