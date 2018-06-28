@@ -22,14 +22,17 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 	//printf("%s\n", get_type_name((type_t)current_node->value.type));
 
 	switch (current_node->value.type) {
-	case DECL:
+	case DECL: // VTYPE WORDS, WORDS
+		// VTYPE WORDS
 		if (current_node->child.size() == 3) {
 			if (inorder(current_node->child[0])[0] == "CHAR") type = CHAR;
 			variables = inorder(current_node->child[1]);
 		}
+		// WORDS
 		if (current_node->child.size() == 2) {
 			variables = inorder(current_node->child[0]);
 		}
+
 		for (int i = 0; i < variables.size(); i++) {
 			insert_symbol(variables[i], symbol_info(type, memory_address));
 			memory_address += 4;
@@ -37,50 +40,58 @@ vector<std::string> inorder(ParseNode *current_node, int register_num = 0) {
 		variables.clear();
 		break;
 
-	case STAT:  // BLOCK, EQUAL, RETURN, while, if-then 
-		if (current_node->child[1]->value.type == EQUAL) {
-			value = inorder(current_node->child[0]);
-			inorder(current_node->child[2], register_num);
-			pseudo_code.push_back("ST " + std::to_string(local_lookup(value[0]).addr) + ", Reg#" + std::to_string(register_num));
+	case STAT:  // BLOCK, EQUAL, RETURN, WHILE, IF-THEN-ELSE
+		// BLOCK
+		if (current_node->child.size() == 1) {
+			inorder(current_node->child[0], register_num);
+		}
+		else if (current_node->child.size() == 3) {
+			// WHILE
+			if (current_node->child[0]->value.type == WHILE) {
+				/*
+				장영
+				*/
+			}
+			// RETURN
+			else if (current_node->child[0]->value.type == RETURN) {
+				inorder(current_node->child[1], register_num);
+				pseudo_code.push_back("MV Reg#0, Reg#" + std::to_string(register_num));
+			}
+		}
+		else if (current_node->child.size() == 4) {
+			// EQUAL
+			if (current_node->child[1]->value.type == EQUAL) {
+				value = inorder(current_node->child[0]);
+				inorder(current_node->child[2], register_num);
+				pseudo_code.push_back("ST " + std::to_string(local_lookup(value[0]).addr) + ", Reg#" + std::to_string(register_num));
+			}
+		}
+		// IF-THEN-ELSE
+		else if (current_node->child.size() == 6) {
+			if (current_node->child[0]->value.type == IF) {
+				/*
+				장영
+				*/
+			}
 		}
 		
-		if (current_node->child[0]->value.type == IF) { 
-			// JUMPF -> make branch
-			// pseudo_code.push_back("LD " );
-			// pseudo_code.push_back("JUMPT " );
-		}
-			
-		if (current_node->child[0]->value.type == WHILE) { 
-			// LABEL ??
-		}
-			
-		if (current_node->child[0]->value.type == RETURN) { 	
-			// COND를 Reg#1로 return
-		}
 		variables.clear();
 		break;
 		
 			
 	case COND: // EXPR < EXPR , EXPR > EXPR , EXPR
+		// EXPR
 		if (current_node->child.size() == 1) {
 			value = inorder(current_node->child[0], register_num);
 			for (int i = 0; i < value.size(); i++) {
 				variables.push_back(value[i]);
 			}
 		}
-		else {/*
-			value = inorder(current_node->child[0]);
-			pseudo_code.push_back("LD Reg#" + to_string(register_num) + ", " + value[0]);
-			if (current_node->child[1]->value.type == GREATER) {
-				value = inorder(current_node->child[1]);
-				pseudo_code.push_back("LD Reg#" + to_string(register_num + 1) + ", " + value[0]);
-				pseudo_code.push_back("LT Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num + 1) + ", Reg#" + to_string(register_num));
-			}
-			else if (current_node->child[1]->value.type == LESS) {
-				value = inorder(current_node->child[1]);
-				pseudo_code.push_back("LD Reg#" + to_string(register_num + 1) + ", " + value[0]);
-				pseudo_code.push_back("LT Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num) + ", Reg#" + to_string(register_num + 1));
-			}*/
+		// EXPR < EXPR , EXPR > EXPR
+		else {
+			/*
+			장영
+			*/
 		}
 		break;
 			

@@ -11,4 +11,5 @@ INT main()
 	ELSE {
 		RETURN b;
 	}
+	RETURN a;
 }
