@@ -80,7 +80,7 @@ std::string translator(const std::string &pseudo_code) {
                         result.append("\n\tpush\teax\n");  // store %eax, gonna be used for multiplication.
                         result.append("\tmov\teax,\t" + reg_table[reg2]);  // %eax = Reg#2
                         result.append("\n\tmul\t" + reg_table[reg3]);  // %eax *= Reg#3
-                        result.append("\n\tmov\teax\t," + reg_table[reg1]);  // store the result into reg1
+                        result.append("\n\tmov\t" + reg_table[reg1] + ",\teax");  // store the result into reg1
                         result.append("\n\tpop\teax\n");   // restore %eax
                         break;
                     } else {  // MV
@@ -89,11 +89,11 @@ std::string translator(const std::string &pseudo_code) {
                     }
                     break;
                 case 'S': // ST
-                    sscanf_s(ctok, "ST Reg#%d, %d", &reg1, &address);
+                    sscanf_s(ctok, "ST %d, Reg#%d", &address, &reg1);
                     result.append("\n\tpush\tebp\n");
                     result.append("\tmov\tebp,\t" + std::to_string(address));
                     result.append("\n\tadd\tebp,\tesp\n");
-                    result.append("\tmov\t" + std::string("\t[ebp]") + reg_table[reg1]);
+                    result.append("\tmov\t" + std::string("[ebp],\t") + reg_table[reg1]);
                     result.append("\n\tpop\tebp\n");
                     break;
                 case 'P':
