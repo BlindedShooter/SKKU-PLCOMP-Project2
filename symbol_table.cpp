@@ -100,20 +100,20 @@ void print_reculsively(ofstream &out, Scope *finding_scope) {
 	symbol_table_t::iterator iter;
 
 	if (finding_scope->symbol_table.size() != 0) {
-		for (int i = 1; i < finding_scope->level; i++) out << "    ";
+		for (unsigned i = 1; i < finding_scope->level; i++) out << "    ";
 		out << "{" << endl;
 		for (iter = finding_scope->symbol_table.begin();iter != finding_scope->symbol_table.end(); iter++) {
-			for (int i = 1; i < finding_scope->level; i++) out << "    ";
+			for (unsigned i = 1; i < finding_scope->level; i++) out << "    ";
 			out << "Name: " << iter->first << " Type: " << get_type_name((type_t)iter->second.type) << " Address: " << iter->second.addr << endl;
 		}
 	}
 
-	for (int i = 0; i < finding_scope->child.size(); i++) {
+	for (unsigned i = 0; i < finding_scope->child.size(); i++) {
 		print_reculsively(out, finding_scope->child[i]);
 	}
 
 	if (finding_scope->symbol_table.size() != 0) {
-		for (int i = 1; i < finding_scope->level; i++) out << "    ";
+		for (unsigned i = 1; i < finding_scope->level; i++) out << "    ";
 		out << "}" << endl;
 	}
 }
