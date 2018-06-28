@@ -53,20 +53,22 @@ int insert_symbol(const std::string &name, symbol_info info) {
     return result;
 }
 
-type_t local_lookup(const std::string &name) {
+symbol_info local_lookup(const std::string &name) {
     auto finding = current_scope->symbol_table.find(name);
-    type_t result;
+    symbol_info result{};
 
     if (finding == current_scope->symbol_table.end()) {  // should be tested if it works well...
-        result = NONE;
+        result.type = NONE;
     } else {
-        result = finding->second;
+        result.type = finding->second.type;
+        result.addr = finding->second.addr;
     }
     return result;
 }
 
-type_t lookup(const std::string &name) {
-    type_t result = NONE;
+symbol_info lookup(const std::string &name) {
+    symbol_info result{};
+    result.type = NONE;
 
     Scope *finding_scope = current_scope;
     for (; finding_scope->level >= 0; finding_scope = finding_scope->parent) {
@@ -75,7 +77,8 @@ type_t lookup(const std::string &name) {
         if (finding == current_scope->symbol_table.end()) {  // should be tested if it works well...
             continue;
         } else {
-            result = finding->second;
+            result.type = finding->second.type;
+            result.addr = finding->second.addr;
             break;
         }
     }
